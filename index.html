@@ -1,0 +1,496 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Cellular Restoration Pathway™ | DYL Method</title>
+<meta name="description" content="Three stages. Nine steps. One transformation. Walk through The Cellular Restoration Pathway™ by DYL Method.">
+<link rel="icon" href="dyl-logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@800;900&family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #1C2333;
+    --panel: #E8EDF0;
+    --teal: #2DD4C8;
+    --orange: #F26B21;
+    --lime: #B5E61D;
+    --gray: #9A9EA2;
+    --badge: #C9CCCF;
+    --line: #D9DCDF;
+    --ink: #1C2333;
+    --white: #FFFFFF;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body {
+    background: var(--navy);
+    color: var(--white);
+    font-family: Montserrat, system-ui, sans-serif;
+  }
+
+  /* ---------- Slide (left panel + map), same proportions as the template ---------- */
+  .slide {
+    display: grid;
+    grid-template-columns: minmax(260px, 32%) 1fr;
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+  .side {
+    background: var(--panel);
+    color: var(--ink);
+    padding: 28px 26px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .side h1 {
+    margin: 0;
+    font-family: "League Spartan", Montserrat, sans-serif;
+    font-weight: 900;
+    font-size: clamp(30px, 3.6vw, 50px);
+    line-height: .92;
+    letter-spacing: -.045em;
+    text-transform: uppercase;
+  }
+  .t { color: var(--teal); } .o { color: var(--orange); } .l { color: #9BC70F; }
+  .side .does {
+    margin: 0;
+    font-weight: 800;
+    font-size: 15px;
+    line-height: 1.35;
+  }
+  .side .photo {
+    margin-top: auto;
+    width: 100%;
+    aspect-ratio: 590 / 700;
+    object-fit: cover;
+    display: block;
+  }
+  .side .byline { margin: 0; font-size: 12.5px; font-weight: 600; line-height: 1.4; }
+  .side .byline b { font-weight: 800; }
+
+  .map { padding: 10px 6px 4px; min-width: 0; }
+  .map svg { width: 100%; height: auto; display: block; }
+
+  /* SVG text */
+  .lbl { font-family: Montserrat, sans-serif; font-weight: 800; }
+  .card-lbl { font-size: 11px; fill: var(--ink); letter-spacing: .04em; }
+  .circle-lbl { font-size: 13px; fill: var(--white); }
+  .badge-lbl { font-size: 19px; fill: var(--white); }
+  .row-lbl { font-size: 15px; fill: var(--lime); letter-spacing: .03em; }
+  .cap { font-size: 12.5px; fill: var(--white); font-weight: 700; }
+  .main-lbl { font-size: 11.5px; fill: var(--white); }
+  .ab-lbl { font-family: "League Spartan", sans-serif; font-size: 30px; font-weight: 900; fill: var(--white); }
+
+  .hit { cursor: pointer; }
+  .hit:focus, .hit:focus-visible { outline: none; }
+  .hit:focus-visible .ring { stroke: var(--lime); stroke-width: 6; }
+  .hl { fill: var(--orange); opacity: 0; transition: opacity .35s ease; }
+  .hl.on { opacity: 1; }
+  .ab-circle { fill: var(--badge); stroke: var(--white); stroke-width: 4; transition: fill .35s ease; }
+  .ab-circle.on { fill: #8CC63F; }
+
+  /* ---------- Detail panel (the words for whatever is highlighted) ---------- */
+  .detail {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 22px 26px 30px;
+    border-top: 4px solid var(--orange);
+    display: grid;
+    gap: 14px;
+  }
+  .kicker {
+    margin: 0;
+    color: var(--lime);
+    font-weight: 800;
+    font-size: 13px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+  }
+  .detail h2 {
+    margin: 0;
+    font-family: "League Spartan", Montserrat, sans-serif;
+    font-weight: 900;
+    font-size: clamp(24px, 3vw, 34px);
+    letter-spacing: -.02em;
+    line-height: 1.05;
+  }
+  .detail .sub { margin: -4px 0 0; color: var(--teal); font-weight: 700; font-size: 15px; }
+  .ft { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .ft div { border-radius: 10px; padding: 14px 16px; }
+  .ft .from { background: #2A3347; border-left: 6px solid var(--gray); }
+  .ft .to { background: var(--teal); color: var(--ink); border-left: 6px solid var(--white); }
+  .ft h3 { margin: 0 0 6px; font-size: 12px; font-weight: 800; letter-spacing: .14em; }
+  .ft p { margin: 0; font-size: 16px; line-height: 1.5; font-weight: 600; }
+  .steps-list { margin: 0; padding-left: 20px; font-size: 16px; line-height: 1.7; font-weight: 600; }
+  .steps-list button {
+    all: unset; cursor: pointer; text-decoration: underline; text-decoration-color: var(--teal);
+    text-underline-offset: 3px;
+  }
+  .steps-list button:focus-visible { outline: 2px solid var(--lime); outline-offset: 2px; }
+
+  .nav { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+  .nav button {
+    font: 800 15px Montserrat, sans-serif;
+    border: 0; border-radius: 999px; padding: 12px 22px; cursor: pointer;
+  }
+  .nav .next { background: var(--orange); color: var(--white); }
+  .nav .back { background: transparent; color: var(--white); border: 2px solid #4A5468; }
+  .nav .sound { background: transparent; color: #AEB6C4; border: 2px solid #4A5468; font-size: 14px; padding: 10px 16px; }
+  .nav .sound[aria-pressed="false"] { color: #6B7487; }
+  .nav button:disabled { opacity: .35; cursor: default; }
+  .nav button:focus-visible { outline: 3px solid var(--lime); outline-offset: 2px; }
+  .cta {
+    display: none; text-decoration: none; background: var(--lime); color: var(--ink);
+    font: 900 16px Montserrat, sans-serif; border-radius: 999px; padding: 12px 24px;
+    box-shadow: 0 0 0 4px rgba(181,230,29,.25);
+  }
+  .cta.on { display: inline-block; }
+  .cta:focus-visible, .cta-mini:focus-visible { outline: 3px solid var(--white); outline-offset: 2px; }
+  .cta-mini { color: var(--lime); font-weight: 800; font-size: 14px; text-underline-offset: 3px; }
+  .cta-mini.off { display: none; }
+  .count { margin-left: auto; font-weight: 700; font-size: 14px; color: #AEB6C4; }
+  .dots { display: flex; gap: 6px; flex-wrap: wrap; }
+  .dots button {
+    width: 11px; height: 11px; padding: 0; border-radius: 50%;
+    border: 2px solid #6B7487; background: transparent; cursor: pointer;
+  }
+  .dots button.on { background: var(--orange); border-color: var(--orange); }
+
+  /* Desktop + tablet: the whole thing fits on one screen, no scrolling */
+  @media (min-width: 761px) and (min-height: 560px) {
+    main {
+      height: 100vh; height: 100svh;
+      max-width: 1280px; margin: 0 auto;
+      display: grid; grid-template-rows: minmax(0, 1fr) auto;
+    }
+    .slide { min-height: 0; max-width: none; margin: 0; }
+    .side { min-height: 0; overflow: hidden; padding: 20px 22px; gap: 10px; }
+    .side h1 { font-size: clamp(24px, min(3.4vw, 5.4vh), 50px); }
+    .side .does { font-size: clamp(12px, 1.7vh, 15px); }
+    .side .photo { flex: 1 1 0; min-height: 0; aspect-ratio: auto; object-position: center 20%; }
+    .map { min-height: 0; }
+    .map svg { height: 100%; }
+    .detail { max-width: none; margin: 0; padding: 12px 22px 14px; gap: 8px; }
+    #detail { display: grid; gap: 8px; min-height: 9.5em; align-content: start; }
+    .detail h2 { font-size: clamp(20px, 2.4vw, 28px); }
+    .ft div { padding: 10px 14px; }
+    .ft p { font-size: 15px; line-height: 1.4; }
+    .steps-list { line-height: 1.5; font-size: 15px; }
+    .nav button { padding: 9px 18px; }
+    .nav .sound { padding: 7px 14px; }
+  }
+
+  /* Upright tablets: photo panel becomes a short header so the map gets the room */
+  @media (min-width: 761px) and (min-height: 560px) and (max-aspect-ratio: 1/1) {
+    .slide { grid-template-columns: 1fr; grid-template-rows: auto minmax(0, 1fr); }
+    .side { display: grid; grid-template-columns: 1fr 120px; gap: 8px 18px; }
+    .side h1, .side .does, .side .byline { grid-column: 1; }
+    .side .photo { grid-column: 2; grid-row: 1 / span 3; width: 120px; height: 140px; flex: none; }
+  }
+
+  @media (max-width: 760px) {
+    /* Phones: map sticks to the top while the words scroll underneath */
+    .slide { display: contents; }
+    .map { position: sticky; top: 0; z-index: 2; background: var(--navy); box-shadow: 0 6px 12px rgba(0,0,0,.35); }
+    .side { padding: 20px 16px; }
+    .side { display: grid; grid-template-columns: 1fr 110px; gap: 10px 14px; }
+    .side h1, .side .does, .side .byline { grid-column: 1; }
+    .side .photo { grid-column: 2; grid-row: 1 / span 3; width: 110px; margin-top: 0; align-self: start; }
+    .side .does { font-size: 14px; }
+    .map { padding: 6px 0 0; }
+    .detail { padding: 18px 16px 26px; }
+    .ft { grid-template-columns: 1fr; }
+    .count { margin-left: 0; width: 100%; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .hl, .ab-circle { transition: none; }
+  }
+</style>
+</head>
+<body>
+
+<main>
+  <section class="slide" aria-label="The Cellular Restoration Pathway map">
+    <aside class="side">
+      <h1>
+        <span class="o">The</span> <span class="l">Cellular</span><br>
+        <span class="t">Restoration</span><br>
+        <span class="o">Pathway</span><span class="t">™</span>
+      </h1>
+      <p class="does">Takes you from diagnosed and dismissed to a body repairing at the cellular level, with evidence of progress.</p>
+      <img class="photo" src="quilla.jpg" alt="Quilla Xi Berry, founder of DYL Method">
+      <p class="byline"><b>Quilla Xi Berry</b> · Double Certified Cellular Regeneration Detox Specialist · Powered by DYL Method™</p>
+    </aside>
+    <div class="map">
+      <svg id="map" viewBox="0 0 820 660" role="img" aria-labelledby="mapTitle">
+        <title id="mapTitle">Three stages, nine steps, from Point A to Point B</title>
+        <defs>
+          <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse">
+            <path d="M0 0 L10 5 L0 10 z" fill="#D9DCDF"/>
+          </marker>
+          <marker id="arrowO" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M0 0 L10 5 L0 10 z" fill="#F26B21"/>
+          </marker>
+        </defs>
+        <g id="layer-hl"></g>
+        <g id="layer-lines"></g>
+        <g id="layer-steps"></g>
+        <g id="layer-ab"></g>
+      </svg>
+    </div>
+  </section>
+
+  <section class="detail" aria-live="polite">
+    <div id="detail"></div>
+    <div class="nav">
+      <button class="back" id="back" type="button">◀ Back</button>
+      <button class="next" id="next" type="button">Walk me through it ▶</button>
+      <button class="sound" id="sound" type="button" aria-pressed="true" aria-label="Narration on. Click to mute.">🔊 Sound on</button>
+      <a class="cta" id="cta" href="https://intake.thedylmethod.com/">Book My Free Body System Assessment →</a>
+      <a class="cta-mini" id="ctaMini" href="https://intake.thedylmethod.com/">Book my free assessment →</a>
+      <span class="count" id="count"></span>
+    </div>
+    <div class="dots" id="dots" aria-label="Jump to a slide"></div>
+  </section>
+</main>
+
+<script>
+// ---------- Content: The Cellular Restoration Pathway (v3 language) ----------
+const MAIN = {
+  from: "I've been diagnosed, dismissed, and handed options I don't fully trust. I don't know what is actually causing this or where to start.",
+  to: "My body is repairing at the cellular level and I have evidence of progress."
+};
+const STAGES = [
+  { name: "Root Cause", sub: "From confusion and fear → to clarity and commitment", capFrom: "Confusion & Fear", capTo: "Clarity & Commitment" },
+  { name: "Protocol", sub: "From knowing to doing → activated cellular repair", capFrom: "Knowing", capTo: "Doing" },
+  { name: "Evidence of Progress", sub: "From progress → to legacy", capFrom: "Progress", capTo: "Legacy" }
+];
+const STEPS = [
+  { name: "Body System Assessment",
+    from: "Scared, newly diagnosed, dismissed by doctors. I don't know who to trust or where to start. The system has left me without answers.",
+    to: "I understand what is actually happening in my body at the cellular level. I have a clear path forward. No more guessing, no more fear." },
+  { name: "The Triple Approach",
+    from: "I've tried herbs, supplements, and diets but nothing works because nothing was ever pulled together into one system.",
+    to: "I have three foundational tools working together (education, C.H.E.W. cellular nutrition, and herbal protocol) creating a complete, unified system." },
+  { name: "Recondition Methodology",
+    from: "Everything I was taught about my body was designed for a different baseline. It has kept me confused, scared, and dependent on a system that was never built for me.",
+    to: "I now understand how my body actually works. I know I have the same cellular regeneration ability that closes a wound on my skin, working on the inside. I have coaches helping me build new habits at the cellular level." },
+  { name: "C.H.E.W. Cellular Nutrition Protocol",
+    from: "Every diet I've tried confused me and gave me temporary results at best.",
+    to: "My cells are being Charged, Hydrated, and cleared of Waste, daily. I can feel my body responding." },
+  { name: "Weekly Vitals Evaluation",
+    from: "No feedback. Just guessing and hoping something is working.",
+    to: "Every week my vitals are evaluated so I always know exactly where my body is in the cellular regeneration process. No more guessing." },
+  { name: "Causation Coaching™",
+    from: "Falling back into old habits because nobody addresses the root cause of WHY I fall off track.",
+    to: "A coach addressing the CAUSE of my patterns, keeping me on protocol so my body regenerates with minimal interruptions." },
+  { name: "Measurable Results",
+    from: "I've been told my conditions are permanent, just manage them. I've been told my body cannot change what has already been done.",
+    to: "I went to my doctors and received confirmation of measurable changes in my health. My vitals are shifting, my body is responding: documented evidence of cellular restoration." },
+  { name: "The Cellular Stewardship Method™",
+    from: "I got results before and went back to my old habits and lost everything I gained.",
+    to: "I now know how to steward my cellular health for life, protecting what I've built and minimizing re-toxification of the body I worked to restore." },
+  { name: "Generational Health Legacy™",
+    from: "My family has watched generation after generation get sick, go on medication, and die early. I thought that was our story.",
+    to: "I broke the generational health pattern in my family. My health 'wealth' is flowing forward to my children, my parents, my sisters, and my community." }
+];
+
+// ---------- Template icons (same order as the Signature Solution template) ----------
+const ICONS = [
+  '<circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/><path d="M14 10l7-7M17 3h4v4"/>',
+  '<path d="M6 20h7M7 20l1-6h3l1 6M8 14l-1-3h5l-1 3M7.5 8a2 2 0 1 0 4 0a2 2 0 1 0-4 0M14 20h5M15 20l.7-5h2.6l.7 5M15 12h4l-.6 3h-2.8zM15 9h4v3h-4zM15 9V7M17 9V7M19 9V7"/>',
+  '<path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/><path d="M10 15v-4l2-3c.8 0 1.2.6 1 1.4l-.4 1.6h2.4c.6 0 1 .5.9 1.1l-.6 2.2c-.1.4-.5.7-1 .7H10z"/>',
+  '<path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/>',
+  '<path d="M15 3v3"/><path d="M20.5 9H13l-1.5-1.5L13 6h7.5z"/><path d="M15 9v12"/><circle cx="6" cy="8" r="2"/><path d="M6 10v5l-2 6M6 15l2 6M3 12l3-1 3 2"/>',
+  '<path d="M3 4h18v4H3z"/><path d="M6 6h.01M9.5 6h.01M13 6h.01M16.5 6h.01"/><circle cx="12" cy="13" r="2.5"/><path d="M7.5 21a4.5 4.5 0 0 1 9 0"/>',
+  '<path d="M2 21h3l5-3h5a2 2 0 0 0 0-4h-4"/><path d="M5 21v-6h3l3-1"/><path d="M13 11V8M16 11V6M19 11V4M22 11V7"/><path d="M12 5l3-2 3 2 4-3"/>',
+  '<path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/><path d="M8 12h.01M12 12h.01M16 12h.01"/>',
+  '<circle cx="12" cy="11" r="2.5"/><circle cx="5.5" cy="13" r="2"/><circle cx="18.5" cy="13" r="2"/><path d="M8 21a4 4 0 0 1 8 0M2 21a3.5 3.5 0 0 1 6-2M16 19a3.5 3.5 0 0 1 6 2"/><path d="M12 2l.7 1.5 1.6.2-1.2 1.1.3 1.6-1.4-.8-1.4.8.3-1.6-1.2-1.1 1.6-.2zM5.5 5l.6 1.2 1.3.2-1 .9.3 1.3-1.2-.7-1.2.7.3-1.3-1-.9 1.3-.2zM18.5 5l.6 1.2 1.3.2-1 .9.3 1.3-1.2-.7-1.2.7.3-1.3-1-.9 1.3-.2z"/>'
+];
+
+// ---------- Geometry (snakes like the template: row 1 L→R, row 2 R→L, row 3 L→R) ----------
+const COLS = [230, 430, 630];
+const ROWS = [520, 315, 110];          // stage 1 bottom, stage 3 top
+const CAP_Y = [610, 400, 196];
+const order = [[0,1,2],[2,1,0],[0,1,2]]; // column index for each step within its row
+const pos = STEPS.map((_, i) => {
+  const r = Math.floor(i / 3);
+  return { x: COLS[order[r][i % 3]], y: ROWS[r], row: r };
+});
+const A = { x: 100, y: 612 }, B = { x: 760, y: 110 };
+
+const NS = "http://www.w3.org/2000/svg";
+const el = (tag, attrs = {}, html) => {
+  const n = document.createElementNS(NS, tag);
+  for (const k in attrs) n.setAttribute(k, attrs[k]);
+  if (html !== undefined) n.innerHTML = html;
+  return n;
+};
+const L = id => document.getElementById(id);
+
+// Highlights: one band per stage, one box per step
+const hlStage = ROWS.map((y, r) => L("layer-hl").appendChild(
+  el("rect", { class: "hl", x: 140, y: y - 92, width: 615, height: CAP_Y[r] - y + 108, rx: 22 })));
+const hlStep = pos.map(p => L("layer-hl").appendChild(
+  el("rect", { class: "hl", x: p.x - 62, y: p.y - 86, width: 124, height: 186, rx: 14 })));
+
+// Connectors
+const line = d => L("layer-lines").appendChild(el("path", {
+  d, fill: "none", stroke: "#D9DCDF", "stroke-width": 9, "stroke-linejoin": "round", "marker-end": "url(#arrow)" }));
+line(`M${A.x + 18} ${A.y - 22} L${pos[0].x - 66} ${pos[0].y + 14}`);
+[[0,1],[1,2],[3,4],[4,5],[6,7],[7,8]].forEach(([a, b]) => {
+  const dir = Math.sign(pos[b].x - pos[a].x);
+  line(`M${pos[a].x + dir * 54} ${pos[a].y} H${pos[b].x - dir * 78}`);
+});
+line(`M${pos[2].x + 54} ${pos[2].y} H732 V${pos[3].y} H${pos[3].x + 64}`);
+line(`M${pos[5].x - 78} ${pos[5].y} H118 V${pos[6].y} H${pos[6].x - 82}`);
+line(`M${pos[8].x + 54} ${B.y} H${B.x - 38}`);
+
+// Stage captions (orange From → To arrows) and vertical stage labels
+STAGES.forEach((s, r) => {
+  const y = CAP_Y[r], g = L("layer-lines");
+  const reverse = r === 1;
+  const left = reverse ? s.capTo : s.capFrom, right = reverse ? s.capFrom : s.capTo;
+  g.appendChild(el("text", { class: "lbl cap", x: 168, y: y + 4 }, left));
+  g.appendChild(el("text", { class: "lbl cap", x: 712, y: y + 4, "text-anchor": "end" }, right));
+  const lw = left.length * 7.6 + 182, rw = 704 - right.length * 7.6;
+  g.appendChild(el("path", {
+    d: reverse ? `M${rw} ${y} H${lw}` : `M${lw} ${y} H${rw}`,
+    stroke: "#F26B21", "stroke-width": 2, "marker-end": "url(#arrowO)" }));
+  const lbl = el("g", { class: "hit", tabindex: 0, role: "button", "aria-label": `Stage ${r + 1}: ${s.name}`, "data-go": 3 + r });
+  lbl.appendChild(el("rect", { x: 34, y: ROWS[r] - 70, width: 34, height: 140, fill: "transparent" }));
+  lbl.appendChild(el("text", { class: "lbl row-lbl", transform: `translate(57 ${ROWS[r]}) rotate(-90)`, "text-anchor": "middle" }, `STAGE ${r + 1}`));
+  L("layer-lines").appendChild(lbl);
+});
+
+// Steps: teal FROM/TO card, gray circle with icon, number badge
+pos.forEach((p, i) => {
+  const g = el("g", { class: "hit", tabindex: 0, role: "button", "aria-label": `Step ${i + 1}: ${STEPS[i].name}`, "data-go": 6 + i });
+  g.appendChild(el("rect", { x: p.x - 38, y: p.y - 76, width: 76, height: 152, rx: 9, fill: "#2DD4C8", stroke: "#fff", "stroke-width": 3 }));
+  g.appendChild(el("text", { class: "lbl card-lbl", x: p.x, y: p.y - 61, "text-anchor": "middle" }, "FROM"));
+  g.appendChild(el("text", { class: "lbl card-lbl", x: p.x, y: p.y + 70, "text-anchor": "middle" }, "TO"));
+  g.appendChild(el("circle", { class: "ring", cx: p.x, cy: p.y, r: 52, fill: "#9A9EA2", stroke: "#fff", "stroke-width": 4 }));
+  g.appendChild(el("g", {
+    transform: `translate(${p.x - 19} ${p.y - 40}) scale(1.6)`, fill: "none", stroke: "#fff",
+    "stroke-width": 1.4, "stroke-linecap": "round", "stroke-linejoin": "round" }, ICONS[i]));
+  g.appendChild(el("text", { class: "lbl circle-lbl", x: p.x, y: p.y + 27, "text-anchor": "middle" }, `STEP ${i + 1}`));
+  g.appendChild(el("circle", { cx: p.x - 56, cy: p.y, r: 19, fill: "#C9CCCF", stroke: "#fff", "stroke-width": 3 }));
+  g.appendChild(el("text", { class: "lbl badge-lbl", x: p.x - 56, y: p.y + 7, "text-anchor": "middle" }, i + 1));
+  L("layer-steps").appendChild(g);
+});
+
+// Points A and B (Main Transformation)
+const abCircles = [[A, "A", 1, "Point A: where you are now"], [B, "B", 2, "Point B: where you'll be"]].map(([p, t, go, label]) => {
+  const g = el("g", { class: "hit", tabindex: 0, role: "button", "aria-label": label, "data-go": go });
+  const c = el("circle", { class: "ab-circle ring", cx: p.x, cy: p.y, r: 27 });
+  g.appendChild(c);
+  g.appendChild(el("text", { class: "ab-lbl", x: p.x, y: p.y + 11, "text-anchor": "middle" }, t));
+  L("layer-ab").appendChild(g);
+  return c;
+});
+const mainLbl = (x, y, anchor) => ["MAIN", "TRANSFORMATION"].forEach((w, k) =>
+  L("layer-ab").appendChild(el("text", { class: "lbl main-lbl", x, y: y + k * 14, "text-anchor": anchor }, w)));
+mainLbl(A.x - 34, A.y - 6, "end");
+mainLbl(B.x + 32, B.y - 52, "end");
+L("map").setAttribute("viewBox", "-75 0 895 660");
+
+// ---------- The 15-slide sequence (matches the 15 template pages) ----------
+const esc = s => s.replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const ft = (f, t) => `<div class="ft"><div class="from"><h3>FROM</h3><p>${esc(f)}</p></div><div class="to"><h3>TO</h3><p>${esc(t)}</p></div></div>`;
+const SLIDES = [
+  { kicker: "The Cellular Restoration Pathway™", title: "Three stages. Nine steps. One transformation.",
+    body: ft(MAIN.from, MAIN.to) },
+  { kicker: "Main Transformation · Point A", title: "Where you are now", body: `<div class="ft"><div class="from" style="grid-column:1/-1"><h3>FROM</h3><p>${esc(MAIN.from)}</p></div></div>`, hlAB: 0 },
+  { kicker: "Main Transformation · Point B", title: "Where you'll be", body: `<div class="ft"><div class="to" style="grid-column:1/-1"><h3>TO</h3><p>${esc(MAIN.to)}</p></div></div>`, hlAB: 1 },
+  ...STAGES.map((s, r) => ({
+    kicker: `Stage ${r + 1}`, title: s.name, sub: s.sub, hlStage: r,
+    body: `<ol class="steps-list" start="${r * 3 + 1}">${STEPS.slice(r * 3, r * 3 + 3).map((st, k) =>
+      `<li><button type="button" data-go="${6 + r * 3 + k}">${esc(st.name)}</button></li>`).join("")}</ol>`
+  })),
+  ...STEPS.map((s, i) => ({
+    kicker: `Stage ${Math.floor(i / 3) + 1} · ${STAGES[Math.floor(i / 3)].name} · Step ${i + 1}`,
+    title: s.name, body: ft(s.from, s.to), hlStep: i
+  }))
+];
+
+const dots = L("dots");
+SLIDES.forEach((s, i) => {
+  const b = document.createElement("button");
+  b.type = "button"; b.dataset.go = i;
+  b.setAttribute("aria-label", `Slide ${i + 1}: ${s.title}`);
+  dots.appendChild(b);
+});
+
+// ---------- Booking links: carry the GHL contact id (?cid=) and ad tags through to the intake ----------
+{
+  const here = new URLSearchParams(location.search);
+  const out = new URLSearchParams({ utm_source: here.get("utm_source") || "pathway", utm_medium: here.get("utm_medium") || "interactive-map" });
+  ["cid", "utm_campaign", "utm_content", "fbclid"].forEach(k => here.get(k) && out.set(k, here.get(k)));
+  ["cta", "ctaMini"].forEach(id => L(id).href = `https://intake.thedylmethod.com/?${out}`);
+}
+
+// ---------- Narration: audio/01.mp3 … audio/15.mp3, one per slide ----------
+const audio = new Audio();
+audio.preload = "auto";
+let started = false;   // browsers only allow sound after the visitor clicks something
+let soundOn = true;
+function play(i) {
+  audio.pause();
+  if (!started || !soundOn) return;
+  audio.src = `audio/${String(i + 1).padStart(2, "0")}.mp3`;
+  audio.play().catch(() => {});
+}
+L("sound").onclick = () => {
+  soundOn = !soundOn;
+  const b = L("sound");
+  b.setAttribute("aria-pressed", soundOn);
+  b.setAttribute("aria-label", soundOn ? "Narration on. Click to mute." : "Narration muted. Click to turn on.");
+  b.textContent = soundOn ? "🔊 Sound on" : "🔇 Sound off";
+  if (soundOn) { started = true; play(cur); } else audio.pause();
+};
+
+let cur = 0;
+function show(i) {
+  cur = Math.max(0, Math.min(SLIDES.length - 1, i));
+  const s = SLIDES[cur];
+  hlStage.forEach((h, r) => h.classList.toggle("on", s.hlStage === r));
+  hlStep.forEach((h, k) => h.classList.toggle("on", s.hlStep === k));
+  abCircles.forEach((c, k) => c.classList.toggle("on", s.hlAB === k));
+  L("detail").innerHTML =
+    `<p class="kicker">${esc(s.kicker)}</p><h2>${esc(s.title)}</h2>` +
+    (s.sub ? `<p class="sub">${esc(s.sub)}</p>` : "") + s.body;
+  L("back").disabled = cur === 0;
+  L("next").disabled = cur === SLIDES.length - 1;
+  L("next").textContent = cur === 0 && !started ? "Walk me through it ▶" : "Next ▶";
+  L("count").textContent = `${cur + 1} / ${SLIDES.length}`;
+  const last = cur === SLIDES.length - 1;
+  L("next").style.display = last ? "none" : "";
+  L("cta").classList.toggle("on", last);
+  L("ctaMini").classList.toggle("off", last);
+  [...dots.children].forEach((d, k) => d.classList.toggle("on", k === cur));
+  play(cur);
+}
+
+document.addEventListener("click", e => {
+  const t = e.target.closest("[data-go]");
+  if (t) { started = true; show(+t.dataset.go); }
+});
+document.addEventListener("keydown", e => {
+  const t = e.target.closest && e.target.closest(".hit[data-go]");
+  if (t && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); started = true; show(+t.dataset.go); return; }
+  if (e.key === "ArrowRight") show(cur + 1);
+  if (e.key === "ArrowLeft") show(cur - 1);
+});
+// First click on "Walk me through it" plays the overview narration; after that it's Next.
+L("next").onclick = () => {
+  if (!started && cur === 0) { started = true; show(0); return; }
+  started = true; show(cur + 1);
+};
+L("back").onclick = () => { started = true; show(cur - 1); };
+show(0);
+</script>
+</body>
+</html>
