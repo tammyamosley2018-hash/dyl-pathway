@@ -424,12 +424,28 @@ SLIDES.forEach((s, i) => {
   dots.appendChild(b);
 });
 
+// ---------- Tracking: tells n8n (→ GHL tags) when a known contact starts, finishes, or clicks Book ----------
+const TRACK_URL = "https://deft-bison-84.nbg1-3.instapods.app/webhook/dyl-pathway";
+const params = new URLSearchParams(location.search);
+const sent = new Set();
+function track(event) {
+  if (sent.has(event)) return;           // each event once per visit
+  sent.add(event);
+  const body = new URLSearchParams({ event, cid: params.get("cid") || "", page: location.href.split("?")[0] });
+  ["utm_source", "utm_medium", "utm_campaign", "utm_content"].forEach(k => params.get(k) && body.set(k, params.get(k)));
+  // form-encoded + no-cors keeps this a "simple" request, and keepalive lets it finish while the page navigates away
+  fetch(TRACK_URL, { method: "POST", body, mode: "no-cors", keepalive: true }).catch(() => {});
+}
+
 // ---------- Booking links: carry the GHL contact id (?cid=) and ad tags through to the intake ----------
 {
   const here = new URLSearchParams(location.search);
   const out = new URLSearchParams({ utm_source: here.get("utm_source") || "pathway", utm_medium: here.get("utm_medium") || "interactive-map" });
   ["cid", "utm_campaign", "utm_content", "fbclid"].forEach(k => here.get(k) && out.set(k, here.get(k)));
-  ["cta", "ctaMini"].forEach(id => L(id).href = `https://intake.thedylmethod.com/?${out}`);
+  ["cta", "ctaMini"].forEach(id => {
+    L(id).href = `https://intake.thedylmethod.com/?${out}`;
+    L(id).addEventListener("click", () => track("pathway-cta-clicked"));
+  });
 }
 
 // ---------- Narration: audio/01.mp3 … audio/15.mp3, one per slide ----------
@@ -472,6 +488,8 @@ function show(i) {
   L("ctaMini").classList.toggle("off", last);
   [...dots.children].forEach((d, k) => d.classList.toggle("on", k === cur));
   play(cur);
+  if (started) track("pathway-started");
+  if (cur === SLIDES.length - 1) track("pathway-completed");
 }
 
 document.addEventListener("click", e => {
